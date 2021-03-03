@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>送花小特效</title>
+    <!-- 引入通用样式 -->
+    <link rel="stylesheet" href="./style/common.css">
+    <!-- 引入第一屏样式 -->
+    <link rel="stylesheet" href="./style/pageA.css">
+    <!-- 引入第二屏样式 -->
+    <link rel="stylesheet" href="./style/pageB.css">
+    <!-- 引入第三屏样式 -->
+    <link rel="stylesheet" href="./style/pageC.css">
+</head>
+
+<body>
+    <!-- 大容器 -->
+    <div id="content">
+        <!-- 需要滚动的容器 -->
+        <ul class="contentWrapper">
+            <!-- 第一屏 -->
+            <li class="pageA">
+                <!-- 第一屏背景 -->
+                <div class="a-background">
+                    <div class="a-background-top"></div>
+                    <div class="a-background-middle"></div>
+                    <div class="a-background-botton"></div>
+                </div>
+                <!-- 第一屏太阳 -->
+                <div class="sun"></div>
+                <!-- 第一屏云 -->
+                <div class="cloudWrapper">
+                    <div class="cloud1"></div>
+                    <div class="cloud2"></div>
+                </div>
+            </li>
+            <!-- 第二屏 -->
+            <li class="pageB">
+                <!-- 第二屏背景图 -->
+                <div class="b-background"></div>
+                <div class="b-background-preload"></div>
+                <!-- 第二屏商店 -->
+                <div class="shop">
+                    <!-- 门 -->
+                    <div class="door">
+                        <div class="door-left"></div>
+                        <div class="door-right"></div>
+                    </div>
+                </div>
+                <!-- 第二屏鸟 -->
+                <div class="bird birdAnim"></div>
+            </li>
+            <!-- 第三屏 -->
+            <li class="pageC">
+                <!-- 第三屏背景图 -->
+                <div class="c-background">
+                    <div class="c-background-top"></div>
+                    <div class="c-background-middle"></div>
+                    <div class="c-background-botton"></div>
+                </div>
+                <!-- 第三屏小女孩 -->
+                <div id="girl"></div>
+                <!-- 第三屏水波 -->
+                <div class="water">
+                    <div class="water1"></div>
+                    <div class="water2"></div>
+                    <div class="water3"></div>
+                    <div class="water4"></div>
+                </div>
+                <!-- 第三屏星星 -->
+                <div class="star">
+                    <div class="star1"></div>
+                    <div class="star2"></div>
+                    <div class="star3"></div>
+                    <div class="star4"></div>
+                    <div class="star5"></div>
+                    <div class="star6"></div>
+                </div>
+            </li>
+        </ul>
+        <!-- 小男孩 -->
+        <div id="boy"></div>
+        <!-- 雪花容器 -->
+        <div class="snowFlakeContainer"></div>
+        <!-- 开始按钮 -->
+        <button class="start">点我开始</button>
+    </div>
+</body>
+<!-- 引入jquery -->
+<script src="./js/jquery2.1.4.js"></script>
+<!-- 引入jquery插件 -->
+<script src="./js/jqueryTransit.js"></script>
+<!-- 引入自己的js文件 -->
+<script src="./js/swipe.js"></script>
+<script src="./js/liaomei.js"></script>
+<script src="./js/snowFlake.js"></script>
+<script src="./js/music.js"></script>
+<script>
+    window.addEventListener("resize", function () {
+        document.location.reload()
+    })
+    var swipe = swipe()
+    var boy = boyWalk()
+    $(function () {
+        $(".start").on("click", function () {
+            $(this).fadeOut()
+            happy.play()
+            setTimeout(function () {
+                boy.walkRun(6000, 0.5).then(function () {
+                    swipe.scrollTo($("#content").width(), 5000)
+                }).then(function () {
+                    return boy.walkRun(5000, 0.5)
+                }).then(function () {
+                    return boy.toShop(1000)
+                }).then(function () {
+                    return openDoor(1000)
+                }).then(function () {
+                    return boy.enterShop(1000)
+                }).then(function () {
+                    lampBright()
+                    birdMove()
+                }).then(function () {
+                    return boy.takeFlower(2000)
+                }).then(function () {
+                    return boy.outShop(2000)
+                }).then(function () {
+                    return shutDoor(1000)
+                }).then(function () {
+                    lampDark()
+                }).then(function () {
+                    swipe.scrollTo($("#content").width() * 2, 3000)
+                }).then(function () {
+                    return boy.walkRun(3000, 0.15)
+                }).then(function () {
+                    return boy.walkRun(1000, 0.25, $("#girl").offset().top / $("#content").height())
+                }).then(function () {
+                    // 男孩走近女孩距离比例
+                    var proportionX = ($("#girl").offset().left - $("#boy").width() + $("#girl").width() / 5) / $("#content").width()
+                    console.log(proportionX)
+                    return boy.walkRun(3000, proportionX)
+                }).then(function () {
+                    boy.resetOriginal()
+                }).then(function () {
+                    boy.rotate(2000)
+                    setTimeout(function () {
+                        happy.pause()
+                        circulation.play()
+                        setTimeout(() => {
+                            snowFlake()
+                        }, 1000);
+                    }, 3000)
+                })
+            }, 50)
+        })
+    })
+</script>
+
+</html>

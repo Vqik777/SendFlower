@@ -1,0 +1,86 @@
+// 背景图
+.b-background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url("../images/background/b_background_dark.png");
+    background-size: 100% 100%;
+}
+
+// 背景图如果没有预加载的话就有一个闪屏的问题，所以做了一个b_background_preload的节点让图片先加载
+.b-background-preload {
+    background-image: url("../images/background/b_background_bright.png");
+    background-repeat: no-repeat;
+    background-position: -9999px -9999px;
+}
+
+// 商店灯的亮度切换采用的是切换背景图片
+.lamp-bright {
+    background-image: url("../images/background/b_background_bright.png");
+}
+
+// 商店
+.shop {
+    width: 39.5%;
+    height: 35.5%;
+    position: absolute;
+    left: 29%;
+    top: 36.5%;
+
+    .door {
+        position: absolute;
+        width: 32%;
+        height: 68%;
+        top: 32%;
+        left: 58.5%;
+        overflow: hidden;
+
+        .door-left,
+        .door-right {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+        }
+
+        .door-left {
+            left: 0%;
+            background-image: url("../images/other/door-left.png");
+            background-size: 100% 100%;
+        }
+
+        .door-right {
+            right: 0%;
+            background-image: url("../images/other/door-right.png");
+            background-size: 100% 100%;
+        }
+    }
+}
+
+// 鸟
+.bird {
+    width: 91px;
+    height: 71px;
+    position: absolute;
+    right: -91px;
+    background-image: url("../images/other/bird.png");
+}
+.birdAnim{
+    animation: birdAnim 400ms step-start infinite;
+}
+@keyframes birdAnim {
+    0% {
+        background-position: -182px 0px;
+    }
+
+    50% {
+        background-position: 0px 0px;
+    }
+
+    75% {
+        background-position: -91px 0px;
+    }
+
+    100% {
+        background-position: -182px 0px;
+    }
+}

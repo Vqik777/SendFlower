@@ -1,0 +1,100 @@
+// 背景图
+.a-background {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+    .a-background-top {
+        width: 100%;
+        height: 71.6%;
+        background-image: url("../images/background/a_background_top.png");
+        background-size: 100% 100%;
+    }
+
+    background-size: 100% 100%;
+
+    .a-background-middle {
+        width: 100%;
+        height: 13.1%;
+        background-image: url("../images/background/a_background_middle.png");
+        background-size: 100% 100%;
+    }
+
+    .a-background-botton {
+        width: 100%;
+        height: 15.3%;
+        background-image: url("../images/background/a_background_botton.png");
+        background-size: 100% 100%;
+    }
+}
+
+// 太阳相关样式
+.sun {
+    width: 201px;
+    height: 201px;
+    position: absolute;
+    z-index: 1;
+    top: -30px;
+    right: 40%;
+    background-image: url("../images/other/sun.png");
+    background-repeat: no-repeat;
+    animation: sunAnim 200s;
+}
+
+
+@keyframes sunAnim {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translateX(-2000px);
+    }
+}
+
+// 云相关样式
+.cloudWrapper {
+
+    .cloud1,
+    .cloud2 {
+        z-index: 2;
+        position: absolute;
+    }
+
+    .cloud1 {
+        width: 181px;
+        height: 101px;
+        left: -5%;
+        top: 15%;
+        background-image: url("../images/other/cloud1.png");
+        animation: cloud1Anim 30s infinite;
+    }
+
+    .cloud2 {
+        width: 301px;
+        height: 140px;
+        right: -5%;
+        background-image: url("../images/other/cloud2.png");
+        animation: cloud2Anim 30s infinite;
+    }
+}
+
+@keyframes cloud1Anim {
+    0% {
+        left: -5%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes cloud2Anim {
+    0% {
+        right: -5%;
+    }
+
+    100% {
+        right: 100%;
+    }
+}
